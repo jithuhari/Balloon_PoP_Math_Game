@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:confetti/confetti.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -10,9 +11,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  ConfettiController? _confettiController;
 
-  AssetsAudioPlayer player1 =AssetsAudioPlayer();
-  AssetsAudioPlayer player2 =AssetsAudioPlayer();
+  @override
+  void dispose() {
+    _confettiController!.dispose();
+
+    super.dispose();
+  }
+
+  AssetsAudioPlayer player1 = AssetsAudioPlayer();
+  AssetsAudioPlayer player2 = AssetsAudioPlayer();
 
   bool isImageVisibleBalloon1 = true;
   bool isImageVisibleBalloon2 = true;
@@ -63,19 +72,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void initState() {
-    
+    _confettiController =
+        ConfettiController(duration: Duration(milliseconds: 500));
+
     super.initState();
 
-     player1.open(
-      Audio('assets/audio/Win.mp3'),
-      autoStart: false , showNotification: true
-      );
+    player1.open(Audio('assets/audio/Win.mp3'),
+        autoStart: false, showNotification: true);
 
-     player2.open(
-      Audio('assets/audio/Lose.wav'),
-      autoStart: false , showNotification: true
-      );
-
+    player2.open(Audio('assets/audio/Lose.wav'),
+        autoStart: false, showNotification: true);
   }
 
   @override
@@ -91,6 +97,25 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           Column(
             children: [
+              //Explosion Animation Widget
+              ConfettiWidget(
+                confettiController: _confettiController!,
+                //shouldLoop: true,
+                blastDirection: pi / 2,
+                colors: [
+                  Colors.red,
+                  Colors.green,
+                  Colors.yellow,
+                  Colors.purpleAccent,
+                  Colors.orange
+                ],
+                numberOfParticles: 10,
+                gravity: .25,
+                blastDirectionality: BlastDirectionality.explosive,
+
+                emissionFrequency: 0.025,
+              ),
+
               SizedBox(
                 height: 50,
               ),
@@ -113,6 +138,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         if (number1 % numberDiv == 0) {
                           player1.play();
                           isImageVisibleBalloon1 = false;
+                          _confettiController!.play();
                           icon1 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
@@ -156,10 +182,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        
                         if (number2 % numberDiv == 0) {
                           player1.play();
                           isImageVisibleBalloon2 = false;
+                          _confettiController!.play();
                           icon2 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
@@ -203,10 +229,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        
                         if (number3 % numberDiv == 0) {
                           player1.play();
                           isImageVisibleBalloon3 = false;
+                          _confettiController!.play();
                           icon3 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
@@ -224,7 +250,6 @@ class _MyHomePageState extends State<MyHomePage> {
                           );
                           score--;
                           wrongAnswers++;
-                          
                         }
                       });
                     },
@@ -262,6 +287,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         if (number4 % numberDiv == 0) {
                           player1.play();
                           isImageVisibleBalloon4 = false;
+                          _confettiController!.play();
                           icon4 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
@@ -308,6 +334,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         if (number5 % numberDiv == 0) {
                           player1.play();
                           isImageVisibleBalloon5 = false;
+                          _confettiController!.play();
                           icon5 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
@@ -354,6 +381,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         if (number6 % numberDiv == 0) {
                           player1.play();
                           isImageVisibleBalloon6 = false;
+                          _confettiController!.play();
                           icon6 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
@@ -408,6 +436,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         if (number7 % numberDiv == 0) {
                           player1.play();
                           isImageVisibleBalloon7 = false;
+                          _confettiController!.play();
                           icon7 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
@@ -451,10 +480,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        
                         if (number8 % numberDiv == 0) {
                           player1.play();
                           isImageVisibleBalloon8 = false;
+                          _confettiController!.play();
                           icon8 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
@@ -501,6 +530,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         if (number9 % numberDiv == 0) {
                           player1.play();
                           isImageVisibleBalloon9 = false;
+                          _confettiController!.play();
                           icon9 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
@@ -552,10 +582,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
-                        
                         if (number10 % numberDiv == 0) {
                           player1.play();
                           isImageVisibleBalloon10 = false;
+                          _confettiController!.play();
                           icon10 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
@@ -602,6 +632,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         if (number11 % numberDiv == 0) {
                           player1.play();
                           isImageVisibleBalloon11 = false;
+                          _confettiController!.play();
                           icon11 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
@@ -648,6 +679,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         if (number12 % numberDiv == 0) {
                           player1.play();
                           isImageVisibleBalloon12 = false;
+                          _confettiController!.play();
                           icon12 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
@@ -688,38 +720,36 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   Spacer(),
-
                 ],
               ),
-              SizedBox(height: 15,),
-
-              Text('Total Correct Answers $correctAnswers ',
-               style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Colors.green
+              SizedBox(
+                height: 15,
               ),
+              Text(
+                'Total Correct Answers $correctAnswers ',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.green),
               ),
-              SizedBox(height: 15,),
-              
-              Text('Total Wrong Answers $wrongAnswers ',
-               style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Colors.red
+              SizedBox(
+                height: 15,
               ),
+              Text(
+                'Total Wrong Answers $wrongAnswers ',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.red),
               ),
               Spacer(),
-
-              Text('Your Final Score is $score',
-              style: TextStyle(
-                fontSize: 40,
-                fontWeight: FontWeight.w600,
-                color: Colors.white
+              Text(
+                'Your Final Score is $score',
+                style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white),
               ),
-              
-              ),
-
               Spacer(),
             ],
           ),
