@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -9,6 +10,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  AssetsAudioPlayer player1 =AssetsAudioPlayer();
+  AssetsAudioPlayer player2 =AssetsAudioPlayer();
+
   bool isImageVisibleBalloon1 = true;
   bool isImageVisibleBalloon2 = true;
   bool isImageVisibleBalloon3 = true;
@@ -21,19 +26,21 @@ class _MyHomePageState extends State<MyHomePage> {
   bool isImageVisibleBalloon10 = true;
   bool isImageVisibleBalloon11 = true;
   bool isImageVisibleBalloon12 = true;
-  final number1 = Random().nextInt(20);
-  final number2 = Random().nextInt(20);
-  final number3 = Random().nextInt(20);
-  final number4 = Random().nextInt(20);
-  final number5 = Random().nextInt(20);
-  final number6 = Random().nextInt(20);
-  final number7 = Random().nextInt(20);
-  final number8 = Random().nextInt(20);
-  final number9 = Random().nextInt(20);
-  final number10 = Random().nextInt(20);
-  final number11 = Random().nextInt(20);
-  final number12 = Random().nextInt(20);
-  final numberDiv = Random().nextInt(5);
+
+  final number1 = nextNumber(min: 2, max: 30);
+  final number2 = nextNumber(min: 2, max: 30);
+  final number3 = nextNumber(min: 2, max: 30);
+  final number4 = nextNumber(min: 2, max: 30);
+  final number5 = nextNumber(min: 2, max: 30);
+  final number6 = nextNumber(min: 2, max: 30);
+  final number7 = nextNumber(min: 2, max: 30);
+  final number8 = nextNumber(min: 2, max: 30);
+  final number9 = nextNumber(min: 2, max: 30);
+  final number10 = nextNumber(min: 2, max: 30);
+  final number11 = nextNumber(min: 2, max: 30);
+  final number12 = nextNumber(min: 2, max: 30);
+  final numberDiv = nextNumber(min: 2, max: 6);
+
   Icon icon1 = Icon(Icons.check);
   Icon icon2 = Icon(Icons.check);
   Icon icon3 = Icon(Icons.check);
@@ -46,8 +53,30 @@ class _MyHomePageState extends State<MyHomePage> {
   Icon icon10 = Icon(Icons.check);
   Icon icon11 = Icon(Icons.check);
   Icon icon12 = Icon(Icons.check);
+
+  int score = 0;
+  int correctAnswers = 0;
+  int wrongAnswers = 0;
+
   Image balloonImage = Image(
       fit: BoxFit.contain, image: AssetImage('assets/images/balloonGreen.png'));
+
+  @override
+  void initState() {
+    
+    super.initState();
+
+     player1.open(
+      Audio('assets/audio/Win.mp3'),
+      autoStart: false , showNotification: true
+      );
+
+     player2.open(
+      Audio('assets/audio/Lose.wav'),
+      autoStart: false , showNotification: true
+      );
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,19 +111,25 @@ class _MyHomePageState extends State<MyHomePage> {
                     onTap: () {
                       setState(() {
                         if (number1 % numberDiv == 0) {
+                          player1.play();
                           isImageVisibleBalloon1 = false;
                           icon1 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
                             size: 50,
                           );
+                          score++;
+                          correctAnswers++;
                         } else {
+                          player2.play();
                           isImageVisibleBalloon1 = false;
                           icon1 = Icon(
                             Icons.close_outlined,
                             color: Colors.red,
                             size: 50,
                           );
+                          score--;
+                          wrongAnswers++;
                         }
                       });
                     },
@@ -121,20 +156,27 @@ class _MyHomePageState extends State<MyHomePage> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
+                        
                         if (number2 % numberDiv == 0) {
+                          player1.play();
                           isImageVisibleBalloon2 = false;
                           icon2 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
                             size: 50,
                           );
+                          score++;
+                          correctAnswers++;
                         } else {
+                          player2.play();
                           isImageVisibleBalloon2 = false;
                           icon2 = Icon(
                             Icons.close_outlined,
                             color: Colors.red,
                             size: 50,
                           );
+                          score--;
+                          wrongAnswers++;
                         }
                       });
                     },
@@ -161,20 +203,28 @@ class _MyHomePageState extends State<MyHomePage> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
+                        
                         if (number3 % numberDiv == 0) {
+                          player1.play();
                           isImageVisibleBalloon3 = false;
                           icon3 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
                             size: 50,
                           );
+                          score++;
+                          correctAnswers++;
                         } else {
+                          player2.play();
                           isImageVisibleBalloon3 = false;
                           icon3 = Icon(
                             Icons.close_outlined,
                             color: Colors.red,
                             size: 50,
                           );
+                          score--;
+                          wrongAnswers++;
+                          
                         }
                       });
                     },
@@ -210,19 +260,25 @@ class _MyHomePageState extends State<MyHomePage> {
                     onTap: () {
                       setState(() {
                         if (number4 % numberDiv == 0) {
+                          player1.play();
                           isImageVisibleBalloon4 = false;
                           icon4 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
                             size: 50,
                           );
+                          score++;
+                          correctAnswers++;
                         } else {
+                          player2.play();
                           isImageVisibleBalloon4 = false;
                           icon4 = Icon(
                             Icons.close_outlined,
                             color: Colors.red,
                             size: 50,
                           );
+                          score--;
+                          wrongAnswers++;
                         }
                       });
                     },
@@ -250,19 +306,25 @@ class _MyHomePageState extends State<MyHomePage> {
                     onTap: () {
                       setState(() {
                         if (number5 % numberDiv == 0) {
+                          player1.play();
                           isImageVisibleBalloon5 = false;
                           icon5 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
                             size: 50,
                           );
+                          score++;
+                          correctAnswers++;
                         } else {
+                          player2.play();
                           isImageVisibleBalloon5 = false;
                           icon5 = Icon(
                             Icons.close_outlined,
                             color: Colors.red,
                             size: 50,
                           );
+                          score--;
+                          wrongAnswers++;
                         }
                       });
                     },
@@ -290,19 +352,25 @@ class _MyHomePageState extends State<MyHomePage> {
                     onTap: () {
                       setState(() {
                         if (number6 % numberDiv == 0) {
+                          player1.play();
                           isImageVisibleBalloon6 = false;
                           icon6 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
                             size: 50,
                           );
+                          score++;
+                          correctAnswers++;
                         } else {
+                          player2.play();
                           isImageVisibleBalloon6 = false;
                           icon6 = Icon(
                             Icons.close_outlined,
                             color: Colors.red,
                             size: 50,
                           );
+                          score--;
+                          wrongAnswers++;
                         }
                       });
                     },
@@ -338,19 +406,25 @@ class _MyHomePageState extends State<MyHomePage> {
                     onTap: () {
                       setState(() {
                         if (number7 % numberDiv == 0) {
+                          player1.play();
                           isImageVisibleBalloon7 = false;
                           icon7 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
                             size: 50,
                           );
+                          score++;
+                          correctAnswers++;
                         } else {
+                          player2.play();
                           isImageVisibleBalloon7 = false;
                           icon7 = Icon(
                             Icons.close_outlined,
                             color: Colors.red,
                             size: 50,
                           );
+                          score--;
+                          wrongAnswers++;
                         }
                       });
                     },
@@ -377,20 +451,27 @@ class _MyHomePageState extends State<MyHomePage> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
+                        
                         if (number8 % numberDiv == 0) {
+                          player1.play();
                           isImageVisibleBalloon8 = false;
                           icon8 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
                             size: 50,
                           );
+                          score++;
+                          correctAnswers++;
                         } else {
+                          player2.play();
                           isImageVisibleBalloon8 = false;
                           icon8 = Icon(
                             Icons.close_outlined,
                             color: Colors.red,
                             size: 50,
                           );
+                          score--;
+                          wrongAnswers++;
                         }
                       });
                     },
@@ -418,19 +499,25 @@ class _MyHomePageState extends State<MyHomePage> {
                     onTap: () {
                       setState(() {
                         if (number9 % numberDiv == 0) {
+                          player1.play();
                           isImageVisibleBalloon9 = false;
                           icon9 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
                             size: 50,
                           );
+                          score++;
+                          correctAnswers++;
                         } else {
+                          player2.play();
                           isImageVisibleBalloon9 = false;
                           icon9 = Icon(
                             Icons.close_outlined,
                             color: Colors.red,
                             size: 50,
                           );
+                          score--;
+                          wrongAnswers++;
                         }
                       });
                     },
@@ -465,20 +552,27 @@ class _MyHomePageState extends State<MyHomePage> {
                   GestureDetector(
                     onTap: () {
                       setState(() {
+                        
                         if (number10 % numberDiv == 0) {
+                          player1.play();
                           isImageVisibleBalloon10 = false;
                           icon10 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
                             size: 50,
                           );
+                          score++;
+                          correctAnswers++;
                         } else {
+                          player2.play();
                           isImageVisibleBalloon10 = false;
                           icon10 = Icon(
                             Icons.close_outlined,
                             color: Colors.red,
                             size: 50,
                           );
+                          score--;
+                          wrongAnswers++;
                         }
                       });
                     },
@@ -506,19 +600,25 @@ class _MyHomePageState extends State<MyHomePage> {
                     onTap: () {
                       setState(() {
                         if (number11 % numberDiv == 0) {
+                          player1.play();
                           isImageVisibleBalloon11 = false;
                           icon11 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
                             size: 50,
                           );
+                          score++;
+                          correctAnswers++;
                         } else {
+                          player2.play();
                           isImageVisibleBalloon11 = false;
                           icon11 = Icon(
                             Icons.close_outlined,
                             color: Colors.red,
                             size: 50,
                           );
+                          score--;
+                          wrongAnswers++;
                         }
                       });
                     },
@@ -546,19 +646,25 @@ class _MyHomePageState extends State<MyHomePage> {
                     onTap: () {
                       setState(() {
                         if (number12 % numberDiv == 0) {
+                          player1.play();
                           isImageVisibleBalloon12 = false;
                           icon12 = Icon(
                             Icons.check_circle,
                             color: Colors.green,
                             size: 50,
                           );
+                          score++;
+                          correctAnswers++;
                         } else {
+                          player2.play();
                           isImageVisibleBalloon12 = false;
                           icon12 = Icon(
                             Icons.close_outlined,
                             color: Colors.red,
                             size: 50,
                           );
+                          score--;
+                          wrongAnswers++;
                         }
                       });
                     },
@@ -582,8 +688,39 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                   Spacer(),
+
                 ],
               ),
+              SizedBox(height: 15,),
+
+              Text('Total Correct Answers $correctAnswers ',
+               style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.green
+              ),
+              ),
+              SizedBox(height: 15,),
+              
+              Text('Total Wrong Answers $wrongAnswers ',
+               style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.red
+              ),
+              ),
+              Spacer(),
+
+              Text('Your Final Score is $score',
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.w600,
+                color: Colors.white
+              ),
+              
+              ),
+
+              Spacer(),
             ],
           ),
         ],
@@ -591,3 +728,13 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+// create a method to show randow numbers between 2 numbers
+int nextNumber({required int min, required int max}) =>
+
+    //max 50 , min 5
+    //1.50-5 = 45
+    //2.Random.nextInt(45+1)=>0...45
+    //3.5 + 0 ... 45 => 5...50
+
+    min + Random().nextInt(max - min + 1);
